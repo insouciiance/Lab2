@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Lab2
 {
-    internal class CSVReader
+    internal class CSVReader : IDisposable
     {
         private StreamReader _reader;
 
@@ -27,5 +25,7 @@ namespace Lab2
             string line = await _reader.ReadLineAsync();
             return line.Split(',');
         }
+
+        public void Dispose() => _reader.Dispose();
     }
 }
