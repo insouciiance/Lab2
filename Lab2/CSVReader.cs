@@ -21,5 +21,11 @@ namespace Lab2
 
             _reader = new StreamReader(fileName);
         }
+
+        public async Task<string[]> ReadLineAsync()
+        {
+            string line = await _reader.ReadLineAsync();
+            return line.Split(',');
+        }
     }
 }
