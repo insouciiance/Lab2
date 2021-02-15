@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ namespace Lab2
 {
     internal class CSVReader : IDisposable
     {
-        private StreamReader _reader;
+        private readonly StreamReader _reader;
 
         public CSVReader(string fileName)
         {
@@ -24,6 +25,33 @@ namespace Lab2
         {
             string line = await _reader.ReadLineAsync();
             return line.Split(',');
+        }
+
+        public static async Task<string[][]> ReadAllDirectoryAsync(string directory)
+        {
+            DirectoryInfo directoryInfo = new DirectoryInfo(directory);
+
+            if (!directoryInfo.Exists)
+            {
+                return null;
+            }
+
+            List<string[]> lines = new List<string[]>();
+
+            foreach (FileInfo fileInfo in directoryInfo.GetFiles("*.csv", SearchOption.AllDirectories))
+            {
+                using (CSVReader csvReader = new CSVReader(fileInfo.FullName))
+                {
+                    string[] lineData;
+
+                    while ((lineData = await csvReader.ReadLineAsync()) != null)
+                    {
+                        lines.Add(lineData);
+                    }
+                }
+            }
+
+            return lines.ToArray();
         }
 
         public void Dispose() => _reader.Dispose();
