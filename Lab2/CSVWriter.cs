@@ -9,7 +9,7 @@ namespace Lab2
 {
     internal class CSVWriter : IDisposable
     {
-        private StreamWriter _writer;
+        private readonly StreamWriter _writer;
 
         public CSVWriter(string fileName)
         {
