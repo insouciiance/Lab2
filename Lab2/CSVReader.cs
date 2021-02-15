@@ -24,7 +24,7 @@ namespace Lab2
         public async Task<string[]> ReadLineAsync()
         {
             string line = await _reader.ReadLineAsync();
-            return line.Split(',');
+            return line?.Split(',');
         }
 
         public static async Task<string[][]> ReadAllDirectoryAsync(string directory)
