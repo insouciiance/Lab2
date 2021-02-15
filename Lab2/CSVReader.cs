@@ -12,8 +12,8 @@ namespace Lab2
 
         public CSVReader(string fileName)
         {
-            string extension = fileName.Split('.').Last();
-            if (extension != "csv")
+            FileInfo csvFileInfo = new FileInfo(fileName);
+            if (csvFileInfo.Extension != "csv")
             {
                 throw new FileLoadException("The file extension was not .csv.");
             }
