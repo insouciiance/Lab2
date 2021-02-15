@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Lab2
 {
-    internal class CSVWriter
+    internal class CSVWriter : IDisposable
     {
         private StreamWriter _writer;
 
         public CSVWriter(string fileName)
         {
-            string extension = fileName.Split('.').Last();
-            if (extension != "csv")
+            FileInfo csvFileInfo = new FileInfo(fileName);
+            if (csvFileInfo.Extension != ".csv")
             {
                 throw new FileLoadException("The file extension was not .csv.");
             }
@@ -36,5 +36,7 @@ namespace Lab2
 
             await _writer.WriteAsync(Environment.NewLine);
         }
+
+        public void Dispose() => _writer.Dispose();
     }
 }
