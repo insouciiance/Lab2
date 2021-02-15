@@ -22,20 +22,7 @@ namespace Lab2
             _writer = new StreamWriter(fileName);
         }
 
-        public async Task WriteLineAsync(params object[] values)
-        {
-            if (values == null)
-            {
-                return;
-            }
-
-            foreach (object value in values)
-            {
-                await _writer.WriteAsync(value?.ToString());
-            }
-
-            await _writer.WriteAsync(Environment.NewLine);
-        }
+        public async Task WriteLineAsync(params object[] values) => await _writer.WriteLineAsync(string.Join(",", values ?? new object[0]));
 
         public void Dispose() => _writer.Dispose();
     }
