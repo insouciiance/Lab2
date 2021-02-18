@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Lab2
@@ -17,6 +14,11 @@ namespace Lab2
             if (csvFileInfo.Extension != ".csv")
             {
                 throw new FileLoadException("The file extension was not .csv.");
+            }
+
+            if (!csvFileInfo.Exists)
+            {
+                csvFileInfo.Create();
             }
 
             _writer = new StreamWriter(fileName);
