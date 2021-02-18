@@ -1,31 +1,40 @@
-﻿namespace Lab2
+﻿using System;
+using System.Collections.Generic;
+
+namespace Lab2
 {
     public class TeamParser
     {
         public static Team Parse(string[] line)
         {
+            if (line == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            if (line.Length < 2)
+            {
+                throw new ArgumentException();
+            }
+
             string name = line[0];
             int rating = 0;
 
             for (int i = 1; i < line.Length; i++)
             {
                 string[] scores = line[i].Split(':');
-                int teamScore = int.Parse(scores[0]);
-                int enemyScore = int.Parse(scores[1]);
 
-                if (teamScore < enemyScore)
+                if (!int.TryParse(scores[0], out int teamScore) | !int.TryParse(scores[1], out int enemyScore))
                 {
-                    rating += (int) Rating.Lose;
+                    throw new ArgumentException();
                 }
-                else if (teamScore == enemyScore)
+
+                rating += (teamScore - enemyScore) switch
                 {
-                    rating += (int) Rating.Draw;
-                }
-                else if (teamScore > enemyScore)
-                {
-                    rating += (int) Rating.Win;
-                }
-                
+                    int diff when diff < 0 => (int) Rating.Lose,
+                    int diff when diff > 0 => (int) Rating.Win,
+                    _ => (int) Rating.Draw
+                };
             }
             
             return new Team(name,rating);
@@ -33,13 +42,21 @@
 
         public static Team[] Parse(string[][] lines)
         {
-            Team[] teams = new Team[lines.Length];
+            List<Team> teams = new List<Team>();
+
             for (int i = 1; i < lines.Length; i++)
             {
-                teams[i] = Parse(lines[i]);
+                try
+                {
+                    teams.Add(Parse(lines[i]));
+                }
+                catch
+                {
+                    // ignored
+                }
             }
 
-            return teams;
+            return teams.ToArray();
         }
     }
 }

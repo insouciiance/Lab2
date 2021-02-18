@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab2
 {
-    internal class CSVReader : IDisposable
+    public class CSVReader : IDisposable
     {
         private readonly StreamReader _reader;
 
@@ -16,6 +16,11 @@ namespace Lab2
             if (csvFileInfo.Extension != ".csv")
             {
                 throw new FileLoadException("The file extension was not .csv.");
+            }
+
+            if (!csvFileInfo.Exists)
+            {
+                throw new FileNotFoundException();
             }
 
             _reader = new StreamReader(fileName);
@@ -40,14 +45,12 @@ namespace Lab2
 
             foreach (FileInfo fileInfo in directoryInfo.GetFiles("*.csv", SearchOption.AllDirectories))
             {
-                using (CSVReader csvReader = new CSVReader(fileInfo.FullName))
-                {
-                    string[] lineData;
+                using CSVReader csvReader = new CSVReader(fileInfo.FullName);
+                string[] lineData;
 
-                    while ((lineData = await csvReader.ReadLineAsync()) != null)
-                    {
-                        lines.Add(lineData);
-                    }
+                while ((lineData = await csvReader.ReadLineAsync()) != null)
+                {
+                    lines.Add(lineData);
                 }
             }
 
