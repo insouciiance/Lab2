@@ -19,7 +19,7 @@ namespace Lab2
             _teams = new List<Team>(teams);
         }
 
-        public Team[] GetTeamsRating() => _teams.OrderBy(team => team.Rating).ToArray();
+        public Team[] GetTeamsRating() => _teams.OrderByDescending(team => team.Rating).ToArray();
 
         public void Add(Team team) => _teams.Add(team);
 
