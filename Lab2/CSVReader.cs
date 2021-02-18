@@ -45,14 +45,12 @@ namespace Lab2
 
             foreach (FileInfo fileInfo in directoryInfo.GetFiles("*.csv", SearchOption.AllDirectories))
             {
-                using (CSVReader csvReader = new CSVReader(fileInfo.FullName))
-                {
-                    string[] lineData;
+                using CSVReader csvReader = new CSVReader(fileInfo.FullName);
+                string[] lineData;
 
-                    while ((lineData = await csvReader.ReadLineAsync()) != null)
-                    {
-                        lines.Add(lineData);
-                    }
+                while ((lineData = await csvReader.ReadLineAsync()) != null)
+                {
+                    lines.Add(lineData);
                 }
             }
 

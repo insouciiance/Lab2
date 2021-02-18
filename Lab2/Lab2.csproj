@@ -54,7 +54,6 @@
     <Compile Include="Rating.cs" />
     <Compile Include="Team.cs" />
     <Compile Include="TeamParser.cs" />
-    <Compile Include="TeamsCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

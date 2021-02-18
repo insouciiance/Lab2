@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Lab2
 {
@@ -41,13 +42,21 @@ namespace Lab2
 
         public static Team[] Parse(string[][] lines)
         {
-            Team[] teams = new Team[lines.Length];
+            List<Team> teams = new List<Team>();
+
             for (int i = 1; i < lines.Length; i++)
             {
-                teams[i] = Parse(lines[i]);
+                try
+                {
+                    teams.Add(Parse(lines[i]));
+                }
+                catch
+                {
+                    // ignored
+                }
             }
 
-            return teams;
+            return teams.ToArray();
         }
     }
 }
