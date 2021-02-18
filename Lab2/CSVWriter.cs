@@ -18,7 +18,7 @@ namespace Lab2
 
             if (!csvFileInfo.Exists)
             {
-                csvFileInfo.Create();
+                using (FileStream stream = csvFileInfo.Create()) { }
             }
 
             _writer = new StreamWriter(fileName);
