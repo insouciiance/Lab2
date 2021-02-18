@@ -16,11 +16,6 @@ namespace Lab2
                 throw new FileLoadException("The file extension was not .csv.");
             }
 
-            if (!csvFileInfo.Exists)
-            {
-                using (FileStream stream = csvFileInfo.Create()) { }
-            }
-
             _writer = new StreamWriter(fileName);
         }
 
