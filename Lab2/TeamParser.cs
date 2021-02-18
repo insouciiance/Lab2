@@ -29,7 +29,7 @@ namespace Lab2
                     throw new ArgumentException();
                 }
 
-                rating += teamScore - enemyScore switch
+                rating += (teamScore - enemyScore) switch
                 {
                     int diff when diff < 0 => (int) Rating.Lose,
                     int diff when diff > 0 => (int) Rating.Win,
