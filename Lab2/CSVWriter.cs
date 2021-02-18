@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Lab2
 {
-    internal class CSVWriter : IDisposable
+    public class CSVWriter : IDisposable
     {
         private readonly StreamWriter _writer;
 

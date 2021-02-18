@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab2
 {
-    internal class CSVReader : IDisposable
+    public class CSVReader : IDisposable
     {
         private readonly StreamReader _reader;
 
