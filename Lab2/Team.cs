@@ -1,6 +1,8 @@
-﻿namespace Lab2
+﻿using System;
+
+namespace Lab2
 {
-    public class Team
+    public class Team : IComparable<Team>
     {
         public string Name { get; private set; }
         public int Rating { get; private set; }
@@ -10,6 +12,8 @@
             this.Name = name;
             this.Rating = rating;
         }
+
+        public int CompareTo(Team other) => other?.Rating - this.Rating ?? -1;
 
         public override string ToString()
         {
