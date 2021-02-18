@@ -18,6 +18,11 @@ namespace Lab2
                 throw new FileLoadException("The file extension was not .csv.");
             }
 
+            if (!csvFileInfo.Exists)
+            {
+                throw new FileNotFoundException();
+            }
+
             _reader = new StreamReader(fileName);
         }
 
