@@ -2,8 +2,6 @@
 {
     public class TeamParser
     {
-        
-        
         public static Team Parse(string[] line)
         {
             string name = line[0];
@@ -31,6 +29,17 @@
             }
             
             return new Team(name,rating);
+        }
+
+        public static Team[] Parse(string[][] lines)
+        {
+            Team[] teams = new Team[lines.Length];
+            for (int i = 1; i < lines.Length; i++)
+            {
+                teams[i] = Parse(lines[i]);
+            }
+
+            return teams;
         }
     }
 }

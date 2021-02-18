@@ -11,6 +11,9 @@
             this.Rating = rating;
         }
 
-        
+        public override string ToString()
+        {
+            return Name + " : " + Rating;
+        }
     }
 }
