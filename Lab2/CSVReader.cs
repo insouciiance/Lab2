@@ -38,7 +38,7 @@ namespace Lab2
 
             if (!directoryInfo.Exists)
             {
-                return new string[0][];
+                throw new DirectoryNotFoundException();
             }
 
             List<string[]> lines = new List<string[]>();
