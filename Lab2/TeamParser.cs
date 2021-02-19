@@ -40,7 +40,7 @@ namespace Lab2
             return new Team(name,rating);
         }
 
-        public static Team[] Parse(string[][] lines)
+        public static Team[] Parse(string[][] lines, bool throwOnError = false)
         {
             List<Team> teams = new List<Team>();
 
@@ -52,7 +52,10 @@ namespace Lab2
                 }
                 catch
                 {
-                    // ignored
+                    if (throwOnError)
+                    {
+                        throw;
+                    }
                 }
             }
 
