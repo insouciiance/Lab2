@@ -48,7 +48,15 @@ namespace Lab2
             {
                 try
                 {
-                    teams.Add(Parse(lines[i]));
+                    Team parsedTeam = Parse(lines[i]); 
+                    if (!teams.Contains(parsedTeam))
+                    {
+                        teams.Add(parsedTeam);
+                    }
+                    else
+                    {
+                        teams[teams.IndexOf(parsedTeam)].Rating += parsedTeam.Rating;
+                    }
                 }
                 catch
                 {
