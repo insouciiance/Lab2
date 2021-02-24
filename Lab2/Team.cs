@@ -10,6 +10,8 @@ namespace Lab2
         public int Scored { get; set; }
         public int Missed { get; set; }
 
+        public int Diff => Scored - Missed;
+
         public Team(string name, int rating)
         {
             this.Name = name;
@@ -22,7 +24,15 @@ namespace Lab2
             Missed = missed;
         }
 
-        public int CompareTo(Team other) => other?.Rating - this.Rating ?? -1;
+        public int CompareTo(Team other)
+        {
+            if (other.Rating == Rating)
+            {
+                return Diff - other.Diff;
+            }
+
+            return other.Rating - Rating;
+        }
 
         public bool Equals(Team another) => this.Name == another?.Name;
 

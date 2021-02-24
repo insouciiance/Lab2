@@ -19,6 +19,8 @@ namespace Lab2
 
             string name = line[0];
             int rating = 0;
+            int scoreSum = 0;
+            int losesSum = 0;
 
             for (int i = 1; i < line.Length; i++)
             {
@@ -35,9 +37,12 @@ namespace Lab2
                     int diff when diff > 0 => (int) Rating.Win,
                     _ => (int) Rating.Draw
                 };
+
+                scoreSum += teamScore;
+                losesSum += enemyScore;
             }
             
-            return new Team(name,rating);
+            return new Team(name,rating,scoreSum,losesSum);
         }
 
         public static Team[] Parse(string[][] lines, bool throwOnError = false)
